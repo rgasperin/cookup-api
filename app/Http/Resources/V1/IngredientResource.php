@@ -21,7 +21,7 @@ class IngredientResource extends JsonResource
 
         return [
             'name' => $this->name,
-            'data de validade' => $validityDate->format('Y-m-d'),
+            'data de validade' => $validityDate->format('d/m/Y'),
         ];
     }
 }

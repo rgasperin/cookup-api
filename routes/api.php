@@ -6,9 +6,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/ingredientes', [IngredientController::class, 'index']);
 Route::get('/ingredientes/{id}', [IngredientController::class, 'show']);
+Route::post('/ingredientes', [IngredientController::class, 'store']);
+Route::put('/ingredientes/{id}', [IngredientController::class, 'update']);
+Route::delete('/ingredientes/{id}', [IngredientController::class, 'destroy']);
+
+// Receitas
 Route::get('/receitas', [RecipeController::class, 'index']);
 Route::get('/receitas/{id}', [RecipeController::class, 'show']);
-Route::post('/receitas/find-by-ingredients', [RecipeController::class, 'findByIngredients']);
+Route::post('/receitas/buscar-ingredientes', [RecipeController::class, 'findByIngredients']);
 Route::post('/receitas', [RecipeController::class, 'store']);
 Route::put('/receitas/{id}', [RecipeController::class, 'update']);
 Route::delete('/receitas/{id}', [RecipeController::class, 'destroy']);

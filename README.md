@@ -11,7 +11,7 @@ http://cookup-api.com/api
 ```bash
 "/receitas" - retorna todos as receitas.
 "/receitas/:id" - retorna a receita por id.
-"/receitas/find-by-ingredients"  - retorna as receitas por ingredientes.
+"/receitas/buscar-ingredientes"  - retorna as receitas por ingredientes.
 "/ingredientes" - retorna todos os ingredientes.
 "/ingredientes/:id" - retorna um ingrediente por id.
 ```
