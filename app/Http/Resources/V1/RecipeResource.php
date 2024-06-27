@@ -24,10 +24,11 @@ class RecipeResource extends JsonResource
             'ingredientesBase' => $this->ingredients->map(function ($ingredient) {
                 $date = Carbon::parse($ingredient->date);
                 $validityDate = $date->addDays(30);
-                
+
                 return [
+                    'id' => $ingredient->id,
                     'name' => $ingredient->name,
-                    'data de validade' => $validityDate->format('d/m/Y'),
+                    'data_de_validade' => $validityDate->format('d/m/Y'),
                 ];
             }),
         ];

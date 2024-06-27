@@ -2,8 +2,17 @@
 
 use App\Http\Controllers\Api\V1\IngredientController;
 use App\Http\Controllers\Api\V1\RecipeController;
+use App\Http\Controllers\Api\V1\TypeController;
 use Illuminate\Support\Facades\Route;
 
+// Tipos
+Route::get('/tipos', [TypeController::class, 'index']);
+Route::get('/tipos/{id}', [TypeController::class, 'show']);
+Route::post('/tipos', [TypeController::class, 'store']);
+Route::put('/tipos/{id}', [TypeController::class, 'update']);
+Route::delete('/tipos/{id}', [TypeController::class, 'destroy']);
+
+// Ingredientes
 Route::get('/ingredientes', [IngredientController::class, 'index']);
 Route::get('/ingredientes/{id}', [IngredientController::class, 'show']);
 Route::post('/ingredientes', [IngredientController::class, 'store']);

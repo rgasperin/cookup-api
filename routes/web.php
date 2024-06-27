@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CookupController;
+use App\Http\Controllers\IngredientsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -11,8 +13,22 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', [CookupController::class, 'index']);
+
+Route::get('/receitas', [CookupController::class, 'index']);
+Route::get('/receitas/{id}', [CookupController::class, 'show']);
+Route::get('/criar', [CookupController::class, 'create']);
+Route::post('/receitas', [CookupController::class, 'store']);
+Route::get('/receitas/{id}/editar', [CookupController::class, 'edit']);
+Route::put('/receitas/{id}', [CookupController::class, 'update']);
+Route::delete('/receitas/{id}', [CookupController::class, 'destroy']);
+Route::post('/buscar-ingredientes', [CookupController::class, 'findByIngredients']);
+
+Route::get('/ingredientes', [IngredientsController::class, 'index']);
+Route::get('/ingredientes/criar', [IngredientsController::class, 'create']);
+Route::post('/ingredientes', [IngredientsController::class, 'store']);
+Route::get('/ingredientes/{id}/editar', [IngredientsController::class, 'edit']);
+Route::put('/ingredientes/{id}', [IngredientsController::class, 'update']);
+Route::delete('/ingredientes/{id}', [IngredientsController::class, 'destroy']);
