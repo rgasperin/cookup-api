@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\IngredientResource;
 use App\Models\Ingredient;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -34,7 +35,7 @@ class IngredientController extends Controller
 
         $ingredient = Ingredient::create([
             'name' => $request->name,
-            'date' => $request->date,
+            'date' => Carbon::parse($request->date)->addDays(31),
         ]);
 
         return response()->json([

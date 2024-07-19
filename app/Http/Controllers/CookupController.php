@@ -34,8 +34,15 @@ class CookupController extends Controller
      */
     public function create()
     {
-        $types = $this->apiService->getRecipeTypes();
+        $response = $this->apiService->getRecipeTypes();
+        $types = $response['data'] ?? [];
+
         $ingredients = $this->apiService->getIngredients();
+
+        if (empty($types)) {
+            return redirect('receitas')->with('error', 'Você precisa criar um tipo antes de criar uma receita.');
+        }
+
         return view('recipes.create', compact('types', 'ingredients'));
     }
 
@@ -46,7 +53,7 @@ class CookupController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'type_id' => 'required|integer',
+            'type_id' => 'required|exists:types,id',
             'ingredients_default' => 'required|string',
             'mode_preparation' => 'required|string',
             'ingredients' => 'required|array',
@@ -93,7 +100,7 @@ class CookupController extends Controller
             $recipe = $response['data'];
             $types = $this->apiService->getRecipeTypes();
             $ingredients = $this->apiService->getIngredients();
-            // dd($recipe);
+
             return view('recipes.edit', compact('recipe', 'types', 'ingredients'));
         } else {
             return view('recipes.edit')->with('error', 'Receita não encontrada.');
@@ -123,7 +130,7 @@ class CookupController extends Controller
             'type_id' => $request->type_id,
             'ingredients_default' => $request->ingredients_default,
             'mode_preparation' => $request->mode_preparation,
-            'ingredient' => $request->ingredient,
+            'ingredients' => $request->ingredient,
         ];
 
         $response = $this->apiService->updateRecipes($id, $data);

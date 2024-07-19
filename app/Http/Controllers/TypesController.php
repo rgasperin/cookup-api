@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\ApiService;
 use Illuminate\Http\Request;
 
-class IngredientsController extends Controller
+class TypesController extends Controller
 {
     protected $apiService;
 
@@ -19,9 +19,10 @@ class IngredientsController extends Controller
      */
     public function index()
     {
-        $ingredients = $this->apiService->getIngredients();
+        $response = $this->apiService->getRecipeTypes();
+        $types = $response['data'];
 
-        return view('ingredients.index', compact('ingredients'));
+        return view('types.index', compact('types'));
     }
 
     /**
@@ -29,7 +30,7 @@ class IngredientsController extends Controller
      */
     public function create()
     {
-        return view('ingredients.create');
+        return view('types.create');
     }
 
     /**
@@ -39,17 +40,16 @@ class IngredientsController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:45',
-            'date' => 'required',
         ]);
 
-        $data = $request->only(['name', 'date']);
+        $data = $request->only(['name']);
 
-        $response = $this->apiService->storeIngredients($data);
+        $response = $this->apiService->storeRecipeTypes($data);
 
         if ($response) {
-            return redirect('ingredientes')->with('error', 'Erro ao criar o ingrediente!');
+            return redirect('tipos')->with('error', 'Erro ao criar o tipo!');
         } else {
-            return redirect('ingredientes')->with('success', 'Ingrediente criado com sucesso!');
+            return redirect('tipos')->with('success', 'Tipo criado com sucesso!');
         }
     }
 
@@ -58,14 +58,14 @@ class IngredientsController extends Controller
      */
     public function edit(string $id)
     {
-        $response = $this->apiService->IngredientsById($id);
+        $response = $this->apiService->RecipeTypesById($id);
 
         if (isset($response['data'])) {
-            $ingredient = $response['data'];
+            $type = $response['data'];
 
-            return view('ingredients.edit', compact('ingredient'));
+            return view('types.edit', compact('type'));
         } else {
-            return view('recipes.edit')->with('error', 'Receita não encontrada.');
+            return view('recipes.edit')->with('error', 'Tipo não encontrada.');
         }
 
     }
@@ -77,20 +77,18 @@ class IngredientsController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:45',
-            'date' => 'required',
         ]);
 
         $data = [
             'name' => $request->name,
-            'date' => $request->date,
         ];
 
-        $response = $this->apiService->updateIngredients($id, $data);
+        $response = $this->apiService->updateRecipeTypes($id, $data);
 
         if ($response) {
-            return redirect('ingredientes')->with('success', 'Ingrediente atualizado com sucesso!');
+            return redirect('tipos')->with('success', 'Tipo atualizado com sucesso!');
         } else {
-            return redirect('ingredientes')->with('error', 'Erro ao atualizar o ingrediente.');
+            return redirect('tipos')->with('error', 'Erro ao atualizar o tipo.');
         }
     }
 
@@ -99,8 +97,8 @@ class IngredientsController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->apiService->deleteIngredients($id);
+        $this->apiService->deleteRecipeTypes($id);
 
-        return redirect('ingredientes')->with('success', 'Ingrediente deletado com sucesso!');
+        return redirect('tipos')->with('success', 'Tipo deletado com sucesso!');
     }
 }

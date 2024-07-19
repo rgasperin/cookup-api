@@ -23,9 +23,9 @@ class Recipe extends Model
         'mode_preparation',
     ];
 
-    public function types()
+    public function type()
     {
-        return $this->hasOne(Type::class, 'id', 'type_id');
+        return $this->belongsTo(Type::class, 'type_id');
     }
 
     public function ingredients()

@@ -20,7 +20,7 @@ class RecipeResource extends JsonResource
             'receita' => $this->name,
             'ingredientes' => $this->ingredients_default,
             'modo_preparo' => $this->mode_preparation,
-            'tipo' => $this->types->name,
+            'tipo' => $this->type ? $this->type->name : 'Sem tipo',
             'ingredientesBase' => $this->ingredients->map(function ($ingredient) {
                 $date = Carbon::parse($ingredient->date);
                 $validityDate = $date->addDays(30);

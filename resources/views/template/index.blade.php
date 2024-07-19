@@ -11,9 +11,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <link rel="stylesheet" href="{{ url('assets/dist/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/styles.css') }}">
@@ -26,9 +30,42 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script src="{{ asset('assets/dist/bootstrap/js/bootstrap.min.js') }}"></script>
-    @yield('script') 
-    <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script>
+        @if (Session::has('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Sucesso!',
+                text: "{{ session('success') }}"
+            });
+        @endif
+
+        @if (Session::has('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: "{{ session('error') }}"
+            });
+        @endif
+
+        @if (Session::has('info'))
+            Swal.fire({
+                icon: 'info',
+                title: 'Info',
+                text: "{{ session('info') }}"
+            });
+        @endif
+
+        @if (Session::has('warning'))
+            Swal.fire({
+                icon: 'warning',
+                title: 'Aviso!',
+                text: "{{ session('warning') }}"
+            });
+        @endif
+    </script>
+    @yield('script')
 </body>
 
 </html>

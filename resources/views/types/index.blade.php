@@ -17,26 +17,21 @@
                             <thead class="table-dark-bg">
                                 <tr>
                                     <th class="padding-card">Nome do Ingrediente</th>
-                                    <th class="padding-card">Data de validade</th>
                                     <th class="padding-card text-end">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (!empty($ingredients))
-                                    @foreach ($ingredients as $ingredient)
+                                @if (!empty($types))
+                                    @foreach ($types as $type)
                                         <tr>
                                             <td class="padding-table">
-                                                <p class="mt-3">{{ $ingredient['name'] }}</p>
-                                            </td>
-                                            <td class="padding-table">
-                                                <p class="formatted-date ms-2 mt-3">{{ $ingredient['data_de_validade'] }}
-                                                </p>
+                                                <p class="mt-3">{{ $type['name'] }}</p>
                                             </td>
 
                                             <td class="padding-table">
                                                 <div class="mt-3 d-flex justify-content-end">
                                                     <a class="ms-2 text-decoration-none"
-                                                        href="{{ url('ingredientes/' . $ingredient['id']) . '/editar' }}">
+                                                        href="{{ url('tipos/' . $type['id']) . '/editar' }}">
                                                         <button class="btn btn-primary btn-view">
                                                             <i class="fi fi-rr-file-edit icon-style"></i>
                                                         </button>
@@ -75,8 +70,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    @if (!empty($ingredients))
-                        <form id="deleteForm" method="POST" action="{{ url('ingredientes/' . $ingredient['id']) }}">
+                    @if (!empty($types))
+                        <form id="deleteForm" method="POST" action="{{ url('tipos/' . $type['id']) }}">
                             @csrf
                             @method('DELETE')
                             <button class="ms-2 btn btn-danger btn-view" type="submit">

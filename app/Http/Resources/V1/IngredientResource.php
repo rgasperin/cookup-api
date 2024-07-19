@@ -17,12 +17,10 @@ class IngredientResource extends JsonResource
     {
         $date = Carbon::parse($this->date);
 
-        $validityDate = $date->addDays(30);
-
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'data_de_validade' => $validityDate->format('Y-m-d'),
+            'data_de_validade' => $date->format('Y-m-d'),
         ];
     }
 }

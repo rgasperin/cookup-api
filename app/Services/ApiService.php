@@ -220,12 +220,89 @@ class ApiService
             $response = $this->client->request('GET', '/api/tipos');
 
             if ($response->getStatusCode() == 200) {
-                $responseData = json_decode($response->getBody()->getContents(), true);
-                return $responseData['data'] ?? [];
+                $data = json_decode($response->getBody()->getContents(), true);
+                return $data['data'] ?? [];
             }
 
             return null;
 
+        } catch (\Exception $e) {
+            return [
+                'status' => 500,
+                'data' => $e->getMessage(),
+            ];
+        }
+    }
+
+    public function RecipeTypesById($id)
+    {
+        try {
+            $response = $this->client->request('GET', "/api/tipos/{$id}");
+
+            if ($response->getStatusCode() == 200) {
+                return json_decode($response->getBody()->getContents(), true);
+            }
+
+            return null;
+
+        } catch (\Exception $e) {
+            return [
+                'status' => 500,
+                'data' => $e->getMessage(),
+            ];
+        }
+    }
+
+    public function storeRecipeTypes($data)
+    {
+        try {
+            $response = $this->client->post('/api/tipos', [
+                'json' => $data,
+            ]);
+
+            if ($response->getStatusCode() == 200) {
+                return json_decode($response->getBody()->getContents(), true);
+            }
+
+            return null;
+        } catch (\Exception $e) {
+            return [
+                'status' => 500,
+                'data' => $e->getMessage(),
+            ];
+        }
+    }
+
+    public function updateRecipeTypes($id, $data)
+    {
+        try {
+            $response = $this->client->request('PUT', "/api/tipos/{$id}", [
+                'json' => $data,
+            ]);
+
+            return [
+                'status' => $response->getStatusCode(),
+                'data' => json_decode($response->getBody()->getContents(), true),
+            ];
+
+        } catch (\Exception $e) {
+            return [
+                'status' => 500,
+                'data' => $e->getMessage(),
+            ];
+        }
+    }
+
+    public function deleteRecipeTypes($id)
+    {
+        try {
+            $response = $this->client->request('DELETE', "/api/tipos/{$id}");
+
+            if ($response->getStatusCode() == 200) {
+                return true;
+            }
+
+            return false;
         } catch (\Exception $e) {
             return [
                 'status' => 500,

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CookupController;
 use App\Http\Controllers\IngredientsController;
+use App\Http\Controllers\TypesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,10 @@ Route::post('/ingredientes', [IngredientsController::class, 'store']);
 Route::get('/ingredientes/{id}/editar', [IngredientsController::class, 'edit']);
 Route::put('/ingredientes/{id}', [IngredientsController::class, 'update']);
 Route::delete('/ingredientes/{id}', [IngredientsController::class, 'destroy']);
+
+Route::get('/tipos', [TypesController::class, 'index']);
+Route::get('/tipos/criar', [TypesController::class, 'create']);
+Route::post('/tipos', [TypesController::class, 'store']);
+Route::get('/tipos/{id}/editar', [TypesController::class, 'edit']);
+Route::put('/tipos/{id}', [TypesController::class, 'update']);
+Route::delete('/tipos/{id}', [TypesController::class, 'destroy']);

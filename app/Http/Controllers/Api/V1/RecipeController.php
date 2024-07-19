@@ -15,7 +15,7 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        return RecipeResource::collection(Recipe::with('ingredients')->with('types')->get());
+        return RecipeResource::collection(Recipe::with('ingredients')->with('type')->get());
     }
 
     /**
