@@ -34,8 +34,7 @@ class CookupController extends Controller
      */
     public function create()
     {
-        $response = $this->apiService->getRecipeTypes();
-        $types = $response['data'] ?? [];
+        $types = $this->apiService->getRecipeTypes();
 
         $ingredients = $this->apiService->getIngredients();
 

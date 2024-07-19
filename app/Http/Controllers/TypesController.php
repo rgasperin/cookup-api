@@ -19,8 +19,7 @@ class TypesController extends Controller
      */
     public function index()
     {
-        $response = $this->apiService->getRecipeTypes();
-        $types = $response['data'];
+        $types = $this->apiService->getRecipeTypes();
 
         return view('types.index', compact('types'));
     }
