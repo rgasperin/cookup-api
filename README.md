@@ -2,27 +2,56 @@
 
 <p align="center">Esta é uma API que fornece receitas aos usuários, com os dados armazenados no Laravel, onde a aplicação está implantada.</p>
 
-## 📦 URL BASE
+<h2> 📦 INSTALANDO DEPENDECIAS </h2>
+
+<p>Eu utilizei o Laragon como ambiente de desenvolvimente e recomendo utilizar este mas fique a vontade para utilizar qualquer outro.</p>
+<p>Link para download: https://laragon.org/download/</p>
+
+## Clone o Repositorio
+
 ```bash
-http://cookup-api.com/api
+git clone https://github.com/rgasperin/cookup-api.git
 ```
 
-## :paw_prints: Diferentes rotas
+## Instale as dependencias do composer
+
 ```bash
-"/receitas" - retorna todos as receitas.
-"/receitas/:id" - retorna a receita por id.
-"/receitas/buscar-ingredientes"  - retorna as receitas por ingredientes.
-"/ingredientes" - retorna todos os ingredientes.
-"/ingredientes/:id" - retorna um ingrediente por id.
+composer install
 ```
 
-## :paw_prints: Tipos de receitas
+## Configure o .env
+
 ```bash
-"doce" - retorna apenas as receitas doces
-"salgado"  - retorna apenas as receitas salgadas
-"agridoce"  - retorna apenas as receitas agridoces
+  APP_DEBUG=false
+  APP_URL=http://cookup-api.com/
+
+  DB_CONNECTION=mysql
+  DB_HOST=127.0.0.1
+  DB_PORT=3306
+  DB_DATABASE=cookup_db
+  DB_USERNAME=root
+  DB_PASSWORD=
 ```
+
+## Gere a chave do laravel
+
+```bash
+  php artisan key:generate
+```
+
+## Configurando o banco de dados
+
+<p>Acesse o diretorio ".../cookup-api/database/" dentro tem um arquivo chamado cookup_db em formato MySQL, utilize o MySQL Workbench para abri-lo, depois de aberto apenas exporte ele seguindo este passo:</p>
+
+```bash 
+  File/Export/Forward Engineer SQL Create (apenas de "next" até chegar em COPY TO Clickboard)
+``` 
+<p>Com o SQL copiado vá no seu banco de dados e cole ele lá em "Consulta" (Se estiver utilizando o HeidiSQL)</p>
+
+E está pronto, apenas rode o projeto.
+
 ## :dart: Exemplo de resposta
+
 ```bash
   {
     "id": 1,
@@ -43,4 +72,3 @@ http://cookup-api.com/api
     "compatibility": "20"
   }
 ```
-
